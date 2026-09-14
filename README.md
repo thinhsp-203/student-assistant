@@ -77,6 +77,27 @@ Mở trình duyệt tại: **http://localhost:5173**
 
 MSSV mẫu để đăng nhập: `20210001`, `20210045`, `20200112`, `20220078`, `20210099`
 
+### Kiểm thử và đánh giá
+
+Chạy backend tests bằng virtual environment (không gọi LLM thật; API tests dùng
+dependency overrides và mock service):
+
+```bash
+cd backend
+venv\Scripts\python.exe -m pytest -q
+```
+
+Kiểm tra schema và thống kê bộ dữ liệu 36 câu:
+
+```bash
+cd ..
+backend\venv\Scripts\python.exe evaluation\validate_dataset.py
+```
+
+Các trường `expected_sources` và `expected_answer` trong
+`evaluation/questions.jsonl` là cơ sở để tính Recall@k, MRR, source coverage,
+unsupported claims và latency p50/p95 khi chạy evaluator.
+
 ## 📁 Cấu trúc dự án
 
 ```

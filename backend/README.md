@@ -62,5 +62,17 @@ python scripts/ingest_documents.py
 uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
 ```
 
+## Kiểm thử API
+
+Chạy toàn bộ test bằng Python trong virtual environment:
+
+```bash
+venv\Scripts\python.exe -m pytest -q
+```
+
+`tests/test_api_integration.py` kiểm tra login, transcript, progress,
+recommendations và SSE chat. Các dependency được override bằng service giả nên
+test không cần gọi Google Gemini/LLM hoặc vector database bên ngoài.
+
 ## Tài liệu API (Swagger UI)
 Sau khi server chạy, truy cập tài liệu API tại: [http://localhost:8000/docs](http://localhost:8000/docs)
