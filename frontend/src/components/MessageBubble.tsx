@@ -75,7 +75,9 @@ export const MessageBubble: React.FC<MessageBubbleProps> = ({ message, isGenerat
                 <div className="mt-2 space-y-2">
                   {message.sources.map((source, idx) => (
                     <div key={idx} className="bg-gray-50 border border-gray-200 rounded-lg p-3 text-xs text-gray-600">
-                      <p className="font-semibold text-gray-700 mb-1">{source.metadata?.title || `Nguồn ${idx + 1}`}</p>
+                      <p className="font-semibold text-gray-700 mb-1">
+                        {String(source.metadata?.title || source.metadata?.source || `Nguồn ${idx + 1}`)}
+                      </p>
                       <p className="line-clamp-3">{source.content}</p>
                     </div>
                   ))}

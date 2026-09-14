@@ -13,6 +13,17 @@ from app.services.student_service import StudentService
 from app.core.config import settings
 from app.services.prompt_templates import SYSTEM_PROMPT
 
+
+def _source_payload(document: Any) -> Dict[str, Any]:
+    metadata = dict(getattr(document, "metadata", {}) or {})
+    content = getattr(document, "page_content", "") or ""
+    source_name = metadata.get("source") or metadata.get("title") or "Tài liệu không xác định"
+    metadata.setdefault("title", source_name)
+    return {
+        "content": content[:500],
+        "metadata": metadata,
+    }
+
 class RAGService:
     def __init__(self, chroma_service: ChromaService, student_service: StudentService):
         self.chroma_service = chroma_service
@@ -76,12 +87,25 @@ class RAGService:
 
             # 6 & 7. Stream the response
             sources = []
+            sources_sent = False
+            answer_emitted = False
             async for chunk in rag_chain.astream({"input": question, "chat_history": history_messages}):
                 if "context" in chunk:
-                    sources = [{"source": doc.metadata.get("source", "Unknown")} for doc in chunk["context"]]
+                    sources = [_source_payload(doc) for doc in chunk["context"]]
+                    if sources and not sources_sent:
+                        yield {"sources": sources}
+                        sources_sent = True
                 if "answer" in chunk:
+                    answer_emitted = True
                     yield {"answer": chunk["answer"], "sources": sources}
             
+            if not sources and not answer_emitted:
+                yield {
+                    "answer": (
+                        "Tôi chưa tìm thấy tài liệu phù hợp để trả lời chắc chắn câu hỏi này. "
+                        "Vui lòng cung cấp thêm ngữ cảnh hoặc liên hệ phòng đào tạo."
+                    )
+                }
             # 8. Done chunk
             yield {"done": True}
 

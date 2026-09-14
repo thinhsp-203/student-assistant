@@ -8,7 +8,7 @@ export interface Message {
 
 export interface Source {
   content: string;
-  metadata: Record<string, string>;
+  metadata: Record<string, string | number | boolean>;
 }
 
 export interface Student {
