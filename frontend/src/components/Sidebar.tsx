@@ -2,6 +2,7 @@ import React from 'react';
 import { BookOpen, FileText, Briefcase, Trash2 } from 'lucide-react';
 import { Student, TopicMode } from '../types';
 import { StudentProfile } from './StudentProfile';
+import { RecommendationPanel } from './RecommendationPanel';
 import clsx from 'clsx';
 
 interface SidebarProps {
@@ -32,6 +33,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
     )}>
       <div className="p-4 flex-1 overflow-y-auto">
         <StudentProfile student={student} />
+        <RecommendationPanel studentId={student.student_id} />
         
         <div className="mt-8">
           <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3 px-2">

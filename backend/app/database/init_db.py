@@ -7,6 +7,7 @@ import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
 
 from app.database.db import db_manager
+from app.models.curriculum import Course
 
 async def init_db():
     print("Creating tables...")
@@ -57,6 +58,12 @@ async def init_db():
                     courses_inserted += 1
                     
         await db.commit()
+    curriculum_path = os.path.join("data", "curriculum", "courses.json")
+    if os.path.exists(curriculum_path):
+        with open(curriculum_path, "r", encoding="utf-8") as f:
+            courses = [Course(**item) for item in json.load(f)]
+        await db_manager.replace_courses(courses)
+        print(f"Loaded {len(courses)} curriculum courses.")
     print(f"Database initialized. Inserted {students_inserted} students and {courses_inserted} courses.")
 
 if __name__ == "__main__":

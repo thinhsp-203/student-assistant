@@ -111,6 +111,7 @@ Sau khi chạy backend, truy cập Swagger UI tại: **http://localhost:8000/doc
 - `POST /api/v1/chat/completions` — Chat streaming (SSE)
 - `GET /api/v1/students/{student_id}` — Thông tin sinh viên
 - `GET /api/v1/students/{student_id}/transcript` — Bảng điểm
+- `GET /api/v1/advising/{student_id}/recommendations` — Gợi ý môn học theo tiên quyết và học kỳ
 - `POST /api/v1/students/login` — Đăng nhập (demo mode)
 - `POST /api/v1/documents/ingest` — Nạp tài liệu
 

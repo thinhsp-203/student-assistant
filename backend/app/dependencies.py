@@ -5,6 +5,7 @@ from functools import lru_cache
 from app.services.chroma_service import ChromaService
 from app.services.student_service import StudentService
 from app.services.rag_service import RAGService
+from app.services.advising_service import AdvisingService
 
 @lru_cache()
 def get_chroma_service() -> ChromaService:
@@ -13,6 +14,10 @@ def get_chroma_service() -> ChromaService:
 @lru_cache()
 def get_student_service() -> StudentService:
     return StudentService()
+
+@lru_cache()
+def get_advising_service() -> AdvisingService:
+    return AdvisingService()
 
 def get_rag_service() -> RAGService:
     chroma_service = get_chroma_service()

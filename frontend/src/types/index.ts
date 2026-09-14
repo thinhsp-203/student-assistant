@@ -41,4 +41,24 @@ export interface StudentProgress {
   eligible_courses: Array<{course_id: string; course_name: string; credits: number}>;
 }
 
+export interface CourseRecommendation {
+  course_id: string;
+  name: string;
+  credits: number;
+  category: string;
+  suggested_semester: number;
+  prerequisites: string[];
+  description?: string;
+}
+
+export interface AdvisingResponse {
+  target_semester: number;
+  eligible_courses: CourseRecommendation[];
+  blocked_courses: Array<{
+    course: CourseRecommendation;
+    missing_prerequisites: string[];
+    reason: string;
+  }>;
+}
+
 export type TopicMode = 'academic' | 'admin' | 'career';

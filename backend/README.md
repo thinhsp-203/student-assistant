@@ -34,6 +34,21 @@ cp .env.example .env
 ```bash
 python scripts/seed_students.py
 ```
+Lệnh này đồng thời tạo các bảng `courses` và `course_prerequisites` và nạp
+danh mục môn học có cấu trúc từ `data/curriculum/courses.json`.
+
+## Tư vấn học tập theo luật
+
+API không phụ thuộc LLM để kiểm tra tiên quyết:
+```text
+GET /api/v1/advising/{student_id}/recommendations?target_semester=6
+```
+Môn đã hoàn thành bị loại khỏi kết quả; môn chỉ được đề xuất khi toàn bộ
+tiên quyết có trong bảng điểm và học kỳ gợi ý không vượt quá học kỳ mục tiêu.
+Có thể chạy kiểm tra nhanh bằng:
+```bash
+python scripts/validate_advising.py
+```
 
 2. Đọc và lưu trữ tài liệu (RAG):
 Đảm bảo bạn có file `.md` trong thư mục `data/documents/` trước khi chạy:

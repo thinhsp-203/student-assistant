@@ -1,4 +1,4 @@
-import { Student, CompletedCourse, StudentProgress } from '../types';
+import { Student, CompletedCourse, StudentProgress, AdvisingResponse } from '../types';
 import { apiGet } from './api';
 
 export const studentService = {
@@ -29,5 +29,9 @@ export const studentService = {
 
   getProgress: async (studentId: string): Promise<StudentProgress> => {
     return apiGet<StudentProgress>(`/students/${studentId}/progress`);
+  },
+
+  getRecommendations: async (studentId: string): Promise<AdvisingResponse> => {
+    return apiGet<AdvisingResponse>(`/advising/${studentId}/recommendations`);
   }
 };
