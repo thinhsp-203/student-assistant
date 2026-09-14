@@ -1,0 +1,51 @@
+# Student Assistant Backend
+
+Backend FastAPI cho hệ thống Trợ lý sinh viên.
+
+## Yêu cầu hệ thống
+- Python 3.10+
+- OpenAI API Key
+
+## Cài đặt
+
+1. Tạo môi trường ảo và kích hoạt:
+```bash
+python -m venv venv
+# Windows
+venv\Scripts\activate
+# Linux/Mac
+source venv/bin/activate
+```
+
+2. Cài đặt dependencies:
+```bash
+pip install -r requirements.txt
+```
+
+3. Cấu hình biến môi trường:
+Copy `.env.example` thành `.env` và điền OpenAI API key của bạn:
+```bash
+cp .env.example .env
+```
+
+## Khởi tạo dữ liệu (Seed & Ingestion)
+
+1. Tạo cơ sở dữ liệu sinh viên mẫu:
+```bash
+python scripts/seed_students.py
+```
+
+2. Đọc và lưu trữ tài liệu (RAG):
+Đảm bảo bạn có file `.md` trong thư mục `data/documents/` trước khi chạy:
+```bash
+python scripts/ingest_documents.py
+```
+
+## Khởi chạy Server
+
+```bash
+uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
+```
+
+## Tài liệu API (Swagger UI)
+Sau khi server chạy, truy cập tài liệu API tại: [http://localhost:8000/docs](http://localhost:8000/docs)

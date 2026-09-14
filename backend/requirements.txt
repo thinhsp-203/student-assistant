@@ -1,0 +1,14 @@
+fastapi>=0.115.6
+uvicorn[standard]>=0.34.0
+pydantic>=2.10.4
+pydantic-settings>=2.7.0
+python-multipart>=0.0.18
+langchain>=0.3.14
+langchain-core>=0.3.29
+langchain-community>=0.3.14
+langchain-google-genai>=2.0.0
+langchain-chroma>=0.2.0
+langchain-text-splitters>=0.3.4
+chromadb>=0.5.23
+tiktoken>=0.8.0
+aiosqlite>=0.20.0
