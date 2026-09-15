@@ -98,6 +98,10 @@ Các trường `expected_sources` và `expected_answer` trong
 `evaluation/questions.jsonl` là cơ sở để tính Recall@k, MRR, source coverage,
 unsupported claims và latency p50/p95 khi chạy evaluator.
 
+Để chạy benchmark retrieval đã có (source hit rate, source coverage@k và
+latency p50/p95), dùng `evaluation\benchmark.py --dry-run` để kiểm tra không
+cần dịch vụ ngoài, hoặc xem `evaluation/README.md` để chạy benchmark thật.
+
 ## 📁 Cấu trúc dự án
 
 ```

@@ -16,3 +16,29 @@ python evaluation/validate_dataset.py
 ```
 
 Có thể truyền đường dẫn JSONL khác làm đối số để kiểm tra bộ dữ liệu mới.
+
+## Retrieval benchmark
+
+`benchmark.py` chỉ đo retrieval, không gọi LLM. Với mỗi câu hỏi, script ghi
+latency (ms), source hit rate (ít nhất một `expected_sources` xuất hiện trong
+top-k), và `source_coverage_at_k` (số expected source xuất hiện chia cho tổng
+expected source). Summary có p50/p95 latency và trung bình của hai metric
+source. Tài liệu không có `expected_sources` được loại khỏi source metrics.
+
+Kiểm tra dataset/configuration mà không cần API key hoặc Chroma:
+
+```powershell
+backend\venv\Scripts\python.exe evaluation\benchmark.py --dry-run
+```
+
+Chạy benchmark thật (cần `GOOGLE_API_KEY` và index đã được ingest):
+
+```powershell
+$env:GOOGLE_API_KEY = "..."
+backend\venv\Scripts\python.exe evaluation\benchmark.py --k 5 --output benchmark.json
+backend\venv\Scripts\python.exe evaluation\benchmark.py --k 5 --output-format csv --output benchmark.csv
+```
+
+Kết quả bị thiếu API key hoặc thư mục Chroma sẽ có `status: "blocked"` và
+exit code khác 0; script không tạo số liệu giả. JSON có `summary` và từng
+case trong `results`; CSV có một dòng cho mỗi case.
