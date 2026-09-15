@@ -24,12 +24,18 @@ class ChromaService:
                 model=settings.EMBEDDING_MODEL,
                 google_api_key=settings.GOOGLE_API_KEY
             )
-        self.vectorstore = Chroma(
-            client=self.client,
-            collection_name=self.collection_name,
-            embedding_function=self.embeddings,
-            collection_metadata={"hnsw:space": "cosine"}
-        )
+        try:
+            self.vectorstore = Chroma(
+                client=self.client,
+                collection_name=self.collection_name,
+                embedding_function=self.embeddings,
+                collection_metadata={"hnsw:space": "cosine"}
+            )
+        except Exception as exc:
+            raise RuntimeError(
+                f"Không thể khởi tạo Chroma với LLM_MODEL={settings.LLM_MODEL} "
+                f"và EMBEDDING_MODEL={settings.EMBEDDING_MODEL}: {exc}"
+            ) from exc
 
     def add_documents(self, docs, metadatas=None):
         if not self.vectorstore:

@@ -9,8 +9,8 @@ class Settings(BaseSettings):
     GOOGLE_API_KEY: str = ""
     CHROMA_PERSIST_DIRECTORY: str = "./data/chroma_db"
     SQLITE_DATABASE_URL: str = "./data/students.db"
-    LLM_MODEL: str = "gemini-3.6-flash"
-    EMBEDDING_MODEL: str = "models/gemini-embedding-2"
+    LLM_MODEL: str = "gemini-2.0-flash"
+    EMBEDDING_MODEL: str = "models/text-embedding-005"
     
     CHUNK_SIZE: int = 600
     CHUNK_OVERLAP: int = 100
