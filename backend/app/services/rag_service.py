@@ -32,7 +32,7 @@ class RAGService:
         self.llm = ChatGoogleGenerativeAI(
             model=settings.LLM_MODEL,
             temperature=0.2,
-            google_api_key=settings.GOOGLE_API_KEY,
+            google_api_key=settings.google_api_key,
         )
 
     async def astream_answer(self, question: str, chat_history: Optional[List[Dict[str, str]]] = None, student_id: Optional[str] = None) -> AsyncGenerator[Dict[str, Any], None]:
@@ -109,5 +109,12 @@ class RAGService:
             # 8. Done chunk
             yield {"done": True}
 
-        except Exception as e:
-            yield {"error": str(e), "done": True}
+        except Exception as exc:
+            message = str(exc)
+            if "401" in message or "UNAUTHENTICATED" in message or "Unauthorized" in message:
+                message = (
+                    "Gemini từ chối credential (401). Hãy tạo Gemini API key hợp lệ "
+                    "tại Google AI Studio, đặt vào GEMINI_API_KEY hoặc GOOGLE_API_KEY "
+                    "trong backend/.env rồi khởi động lại backend. Không dùng OAuth access token."
+                )
+            yield {"error": message, "done": True}

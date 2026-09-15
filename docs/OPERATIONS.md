@@ -5,7 +5,8 @@
 Model được đọc từ `backend/.env`:
 
 ```env
-GOOGLE_API_KEY=...
+GEMINI_API_KEY=...
+# GOOGLE_API_KEY=... is also supported for backward compatibility.
 LLM_MODEL=gemini-2.0-flash
 EMBEDDING_MODEL=models/text-embedding-005
 ```

@@ -21,7 +21,7 @@ def health_check_detailed(chroma_service = Depends(get_chroma_service)) -> Dict[
     }
     try:
         response["document_count"] = chroma_service.get_collection_stats().get("count", 0)
-        response["rag_configured"] = bool(settings.GOOGLE_API_KEY)
+        response["rag_configured"] = bool(settings.google_api_key)
     except Exception as exc:
         response["status"] = "degraded"
         response["rag_configured"] = False

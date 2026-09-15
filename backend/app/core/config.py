@@ -7,6 +7,7 @@ class Settings(BaseSettings):
     API_V1_STR: str = "/api/v1"
     
     GOOGLE_API_KEY: str = ""
+    GEMINI_API_KEY: str = ""
     CHROMA_PERSIST_DIRECTORY: str = "./data/chroma_db"
     SQLITE_DATABASE_URL: str = "./data/students.db"
     LLM_MODEL: str = "gemini-2.0-flash"
@@ -19,5 +20,9 @@ class Settings(BaseSettings):
     BACKEND_CORS_ORIGINS: List[str] = ["http://localhost:5173", "http://localhost:3000"]
 
     model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8", extra="ignore")
+
+    @property
+    def google_api_key(self) -> str:
+        return self.GOOGLE_API_KEY or self.GEMINI_API_KEY
 
 settings = Settings()

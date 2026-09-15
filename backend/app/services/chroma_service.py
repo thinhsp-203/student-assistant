@@ -17,12 +17,12 @@ class ChromaService:
 
     def initialize(self):
         self.client = chromadb.PersistentClient(path=self.persist_directory)
-        if self.embeddings is None and not settings.GOOGLE_API_KEY:
+        if self.embeddings is None and not settings.google_api_key:
             return
         if self.embeddings is None:
             self.embeddings = GoogleGenerativeAIEmbeddings(
                 model=settings.EMBEDDING_MODEL,
-                google_api_key=settings.GOOGLE_API_KEY
+                google_api_key=settings.google_api_key
             )
         try:
             self.vectorstore = Chroma(
@@ -41,21 +41,21 @@ class ChromaService:
         if not self.vectorstore:
             self.initialize()
         if not self.vectorstore:
-            raise RuntimeError("GOOGLE_API_KEY is required to ingest documents")
+            raise RuntimeError("GEMINI_API_KEY/GOOGLE_API_KEY hợp lệ là bắt buộc để nạp tài liệu")
         return self.vectorstore.add_documents(documents=docs)
 
     def search(self, query: str, k: int = 5, filter: Optional[Dict[str, Any]] = None):
         if not self.vectorstore:
             self.initialize()
         if not self.vectorstore:
-            raise RuntimeError("GOOGLE_API_KEY is required to search documents")
+            raise RuntimeError("GEMINI_API_KEY/GOOGLE_API_KEY hợp lệ là bắt buộc để tìm kiếm tài liệu")
         return self.vectorstore.similarity_search(query, k=k, filter=filter)
 
     def get_retriever(self, k: int = 5):
         if not self.vectorstore:
             self.initialize()
         if not self.vectorstore:
-            raise RuntimeError("GOOGLE_API_KEY is required to retrieve documents")
+            raise RuntimeError("GEMINI_API_KEY/GOOGLE_API_KEY hợp lệ là bắt buộc để retrieval")
         return self.vectorstore.as_retriever(search_kwargs={"k": k})
 
     def delete_collection(self):
