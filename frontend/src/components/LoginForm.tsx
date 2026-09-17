@@ -2,12 +2,13 @@ import React, { useState } from 'react';
 import { GraduationCap, ArrowRight, Loader2 } from 'lucide-react';
 
 interface LoginFormProps {
-  onLogin: (studentId: string) => Promise<any>;
+  onLogin: (studentId: string, password?: string) => Promise<any>;
   isLoading: boolean;
 }
 
 export const LoginForm: React.FC<LoginFormProps> = ({ onLogin, isLoading }) => {
   const [studentId, setStudentId] = useState('');
+  const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -17,7 +18,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onLogin, isLoading }) => {
       return;
     }
     try {
-      await onLogin(studentId.trim());
+      await onLogin(studentId.trim(), password || undefined);
     } catch (err: any) {
       setError(err.message || 'Đăng nhập thất bại. Vui lòng kiểm tra lại MSSV.');
     }
@@ -53,6 +54,20 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onLogin, isLoading }) => {
               placeholder="Ví dụ: 20210001"
             />
             {error && <p className="mt-2 text-sm text-red-600">{error}</p>}
+          </div>
+          <div>
+            <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
+              Mật khẩu (tùy chọn trong chế độ demo)
+            </label>
+            <input
+              id="password"
+              type="password"
+              value={password}
+              onChange={(e) => { setPassword(e.target.value); setError(''); }}
+              disabled={isLoading}
+              className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors"
+              placeholder="Nhập mật khẩu khi tài khoản yêu cầu"
+            />
           </div>
 
           <button

@@ -37,6 +37,14 @@ python scripts/seed_students.py
 Lệnh này đồng thời tạo các bảng `courses` và `course_prerequisites` và nạp
 danh mục môn học có cấu trúc từ `data/curriculum/courses.json`.
 
+Database dùng SQLAlchemy ORM. Mặc định là SQLite (`SQLITE_DATABASE_URL`); đặt
+`DATABASE_URL` để dùng PostgreSQL. Các bản ghi seed có thể có `password_hash`
+(bcrypt) và `role` (`student`, `advisor` hoặc `admin`). Đăng nhập trả về JWT:
+`POST /api/v1/students/login` với `student_id` và `password`. Các seed cũ
+không có hash vẫn hỗ trợ đăng nhập demo không mật khẩu; hãy thêm hash trước
+khi triển khai production. Student chỉ đọc được hồ sơ của mình; advisor/admin
+được đọc dữ liệu rộng hơn.
+
 ## Tư vấn học tập theo luật
 
 API không phụ thuộc LLM để kiểm tra tiên quyết:

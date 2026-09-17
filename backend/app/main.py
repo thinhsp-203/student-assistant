@@ -5,9 +5,11 @@ from contextlib import asynccontextmanager
 from app.api.v1.api import api_router
 from app.core.config import settings
 from app.dependencies import get_chroma_service
+from app.database.db import db_manager
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
+    await db_manager.create_tables()
     # Initialize chroma_service on startup
     chroma_service = get_chroma_service()
     chroma_service.initialize()

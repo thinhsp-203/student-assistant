@@ -6,6 +6,11 @@ from app.models.curriculum import Course
 class StudentResponse(BaseModel):
     student: Student
 
+class TokenResponse(BaseModel):
+    access_token: str
+    token_type: str = "bearer"
+    student: Optional[Student] = None
+
 class TranscriptResponse(BaseModel):
     student: Student
     completed_courses: List[CompletedCourse]

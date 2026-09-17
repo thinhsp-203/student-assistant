@@ -32,11 +32,11 @@ export function useAuth() {
     setIsLoading(false);
   }, []);
 
-  const login = async (studentId: string) => {
+  const login = async (studentId: string, password?: string) => {
     setIsLoading(true);
     setError(null);
     try {
-      const data = await studentService.login(studentId);
+      const data = await studentService.login(studentId, password);
       setStudent(data);
       localStorage.setItem('studentData', JSON.stringify(data));
       return data;
@@ -51,6 +51,7 @@ export function useAuth() {
   const logout = () => {
     setStudent(null);
     localStorage.removeItem('studentData');
+    localStorage.removeItem('accessToken');
   };
 
   return {

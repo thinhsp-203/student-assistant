@@ -102,6 +102,10 @@ unsupported claims và latency p50/p95 khi chạy evaluator.
 latency p50/p95), dùng `evaluation\benchmark.py --dry-run` để kiểm tra không
 cần dịch vụ ngoài, hoặc xem `evaluation/README.md` để chạy benchmark thật.
 
+Proxy đánh giá Faithfulness, Context Precision và Answer Relevance (không
+gọi LLM, không phụ thuộc auth) nằm ở `evaluation/quality.py`; schema và
+phương pháp báo cáo Chương 4 xem `evaluation/README.md`.
+
 ## 📁 Cấu trúc dự án
 
 ```

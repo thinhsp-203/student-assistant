@@ -10,6 +10,10 @@ class Settings(BaseSettings):
     GEMINI_API_KEY: str = ""
     CHROMA_PERSIST_DIRECTORY: str = "./data/chroma_db"
     SQLITE_DATABASE_URL: str = "./data/students.db"
+    DATABASE_URL: str = ""
+    JWT_SECRET_KEY: str = "change-this-development-secret"
+    JWT_ALGORITHM: str = "HS256"
+    ACCESS_TOKEN_EXPIRE_MINUTES: int = 60
     LLM_MODEL: str = "gemini-2.0-flash"
     EMBEDDING_MODEL: str = "models/text-embedding-005"
     
@@ -24,5 +28,12 @@ class Settings(BaseSettings):
     @property
     def google_api_key(self) -> str:
         return self.GOOGLE_API_KEY or self.GEMINI_API_KEY
+
+    @property
+    def database_url(self) -> str:
+        url = self.DATABASE_URL.strip()
+        if url:
+            return url
+        return f"sqlite:///{self.SQLITE_DATABASE_URL}"
 
 settings = Settings()

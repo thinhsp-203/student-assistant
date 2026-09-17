@@ -1,0 +1,18 @@
+[
+  {
+    "id": "fake-001",
+    "question": "Điều kiện đăng ký môn có tiên quyết?",
+    "answer": "Sinh viên phải hoàn thành môn tiên quyết.",
+    "contexts": [
+      {
+        "text": "Sinh viên phải hoàn thành môn tiên quyết trước khi đăng ký.",
+        "source": "quy_che_dao_tao.md"
+      },
+      {
+        "text": "Lịch học được công bố theo học kỳ.",
+        "source": "lich_hoc.md"
+      }
+    ],
+    "expected_sources": ["quy_che_dao_tao.md"]
+  }
+]

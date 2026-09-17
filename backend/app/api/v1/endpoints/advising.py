@@ -3,6 +3,7 @@ from fastapi import APIRouter, Depends, HTTPException, Query
 from app.dependencies import get_advising_service
 from app.schemas.advising import AdvisingResponse
 from app.services.advising_service import AdvisingService
+from app.core.auth import authorize_student
 
 router = APIRouter()
 
@@ -12,6 +13,7 @@ async def recommendations(
     student_id: str,
     target_semester: int | None = Query(default=None, ge=1, le=20),
     advising_service: AdvisingService = Depends(get_advising_service),
+    _user=Depends(authorize_student),
 ):
     try:
         result = await advising_service.recommend(student_id, target_semester)

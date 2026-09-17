@@ -1,10 +1,12 @@
 const API_BASE_URL = '/api/v1';
 
 export async function apiGet<T>(path: string): Promise<T> {
+  const token = localStorage.getItem('accessToken');
   const response = await fetch(`${API_BASE_URL}${path}`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
+      ...(token ? { Authorization: `Bearer ${token}` } : {}),
     },
   });
 
@@ -17,10 +19,12 @@ export async function apiGet<T>(path: string): Promise<T> {
 }
 
 export async function apiPost<T>(path: string, body: any): Promise<T> {
+  const token = localStorage.getItem('accessToken');
   const response = await fetch(`${API_BASE_URL}${path}`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
+      ...(token ? { Authorization: `Bearer ${token}` } : {}),
     },
     body: JSON.stringify(body),
   });

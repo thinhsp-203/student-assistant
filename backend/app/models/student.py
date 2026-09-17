@@ -1,5 +1,6 @@
+from typing import Optional
 from pydantic import BaseModel
-from typing import List, Optional, Any
+
 
 class Student(BaseModel):
     student_id: str
@@ -13,6 +14,8 @@ class Student(BaseModel):
     total_credits_required: int
     status: str
     warnings: Optional[str] = None
+    role: str = "student"
+
 
 class CompletedCourse(BaseModel):
     course_id: str
@@ -22,6 +25,7 @@ class CompletedCourse(BaseModel):
     grade_point: float
     semester: int
 
+
 class StudentTranscript(BaseModel):
     student: Student
-    completed_courses: List[CompletedCourse]
+    completed_courses: list[CompletedCourse]

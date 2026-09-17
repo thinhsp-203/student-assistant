@@ -1,12 +1,13 @@
 import { Student, CompletedCourse, StudentProgress, AdvisingResponse } from '../types';
-import { apiGet } from './api';
+import { apiGet, apiPost } from './api';
 
 export const studentService = {
-  login: async (studentId: string): Promise<Student> => {
-    // In a real app, this would be a proper authentication endpoint
-    // For this prototype, we might just fetch the student profile
-    // Assuming there's a login or profile endpoint:
-    const response = await apiGet<{ student: Student }>(`/students/${studentId}`);
+  login: async (studentId: string, password?: string): Promise<Student> => {
+    const response = await apiPost<{ access_token: string; student: Student }>(
+      '/students/login',
+      { student_id: studentId, ...(password ? { password } : {}) }
+    );
+    localStorage.setItem('accessToken', response.access_token);
     const student = response.student;
     
     // Parse warnings if they come as a string from the backend SQLite DB
