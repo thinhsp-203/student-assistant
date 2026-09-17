@@ -64,6 +64,16 @@ python scripts/validate_advising.py
 python scripts/ingest_documents.py
 ```
 
+Để đồng bộ dữ liệu công khai từ website chính thức HCM-UTE (không thu thập
+dữ liệu cá nhân), chạy trước:
+```bash
+python scripts/sync_hcmute_open_data.py
+python scripts/ingest_documents.py
+```
+Danh sách URL được quản lý trong `data/sources/hcmute_public_sources.json`.
+Nội dung đồng bộ có thời điểm truy xuất và liên kết nguồn để hiển thị/trích
+dẫn; cần kiểm tra lại thông báo mới nhất trước khi áp dụng thực tế.
+
 ## Khởi chạy Server
 
 ```bash

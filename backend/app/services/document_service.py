@@ -1,4 +1,5 @@
 import os
+import re
 from langchain_community.document_loaders import DirectoryLoader, TextLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 
@@ -22,6 +23,14 @@ class DocumentService:
         for doc in docs:
             filename = os.path.basename(doc.metadata.get("source", ""))
             doc.metadata["doc_type"] = filename
+            doc.metadata["institution"] = "HCM-UTE" if "hcmute" in filename.lower() else "demo"
+            doc.metadata["source_kind"] = "official_public" if "hcmute" in filename.lower() else "simulated"
+            heading = re.search(r"^#\s+(.+)$", doc.page_content, re.MULTILINE)
+            source_url = re.search(r"> Nguồn chính thức: \[(https?://[^]]+)\]", doc.page_content)
+            if heading:
+                doc.metadata["title"] = heading.group(1).strip()
+            if source_url:
+                doc.metadata["source_url"] = source_url.group(1)
             
         chunks = self.text_splitter.split_documents(docs)
         if chunks:

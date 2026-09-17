@@ -1,0 +1,31 @@
+{
+  "institution": "HCM-UTE",
+  "institution_name": "Trường Đại học Công nghệ Kỹ thuật Thành phố Hồ Chí Minh",
+  "source_policy": "Chỉ đồng bộ nội dung công khai từ website chính thức; không thu thập dữ liệu cá nhân.",
+  "sources": [
+    {
+      "id": "hcmute-home",
+      "title": "Cổng thông tin HCM-UTE",
+      "url": "https://hcmute.edu.vn/",
+      "category": "general"
+    },
+    {
+      "id": "hcmute-opening-2026",
+      "title": "HCM-UTE khai giảng năm học 2026-2027",
+      "url": "https://hcmute.edu.vn/ArticleId/d81b273c-e181-4e4a-912a-f6eb446f12e2/hcm-ute-khai-giang-nam-hoc-2026-2027",
+      "category": "academic"
+    },
+    {
+      "id": "hcmute-green-technology-2026",
+      "title": "Hội thảo Khoa học Kỹ thuật và Công nghệ Xanh lần thứ 13 năm 2026",
+      "url": "https://hcmute.edu.vn/ArticleId/6b41d050-4cf0-4950-b164-3dd4150307db/hoi-thao-khoa-hoc-ky-thuat-va-cong-nghe-xanh-lan-thu-13-nam-2026-thuc-day-nghien-cuu-doi-moi-sang-tao-vi-phat-trien-ben-vung",
+      "category": "career"
+    },
+    {
+      "id": "hcmute-dormitory-mou-2026",
+      "title": "HCM-UTE ký kết MOU hỗ trợ sinh viên",
+      "url": "https://hcmute.edu.vn/ArticleId/9f188225-5b3f-42f9-b8a2-70886bc2bc71/hcm-ute-ky-ket-mou-voi-trung-tam-quan-ly-ky-tuc-xa-va-khu-do-thi-hcm-ute",
+      "category": "administrative"
+    }
+  ]
+}

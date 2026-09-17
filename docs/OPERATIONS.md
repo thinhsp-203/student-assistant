@@ -73,3 +73,21 @@ cương cần ghi rõ giới hạn này. Khi có tài liệu/quy chế thật đ
 đặt file Markdown vào `backend/data/documents/`, cập nhật metadata nếu cần và
 chạy ingestion lại. Không đưa dữ liệu cá nhân thật hoặc văn bản nội bộ chưa
 được phép lên repository công khai.
+
+## 5. Đồng bộ dữ liệu công khai HCM-UTE
+
+Hệ thống có danh sách nguồn được kiểm soát tại
+`backend/data/sources/hcmute_public_sources.json`. Chỉ các trang công khai
+trên website chính thức được đồng bộ; không lấy dữ liệu cá nhân, dữ liệu đăng
+nhập hoặc nội dung sau tường quyền truy cập.
+
+```powershell
+cd D:\SONGNAM\student-assistant\backend
+venv\Scripts\python.exe scripts\sync_hcmute_open_data.py
+venv\Scripts\python.exe scripts\ingest_documents.py
+```
+
+Mỗi tài liệu lưu URL, danh mục và thời điểm đồng bộ. Nếu website thay đổi cấu
+trúc hoặc một URL không còn tồn tại, script báo lỗi và trả mã thoát khác 0;
+không xóa dữ liệu cũ một cách âm thầm. Các trang tin chỉ là dữ liệu tham khảo,
+không thay thế quy chế/chương trình đào tạo được nhà trường ban hành.
