@@ -17,7 +17,7 @@ class Settings(BaseSettings):
     LLM_MODEL: str = "gemini-3.6-flash"
     EMBEDDING_MODEL: str = "models/gemini-embedding-001"
     
-    CHUNK_SIZE: int = 1200
+    CHUNK_SIZE: int = 1400
     CHUNK_OVERLAP: int = 150
     RETRIEVAL_TOP_K: int = 5
     
