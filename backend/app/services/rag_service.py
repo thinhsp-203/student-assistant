@@ -117,4 +117,18 @@ class RAGService:
                     "tại Google AI Studio, đặt vào GEMINI_API_KEY hoặc GOOGLE_API_KEY "
                     "trong backend/.env rồi khởi động lại backend. Không dùng OAuth access token."
                 )
+            elif "404" in message or "NOT_FOUND" in message:
+                message = (
+                    f"Gemini không hỗ trợ model hiện tại "
+                    f"(LLM_MODEL={settings.LLM_MODEL}, "
+                    f"EMBEDDING_MODEL={settings.EMBEDDING_MODEL}). "
+                    "Hãy cập nhật model trong backend/.env theo danh sách model "
+                    "được cấp cho API key rồi khởi động lại backend."
+                )
+            elif "429" in message or "RESOURCE_EXHAUSTED" in message:
+                message = (
+                    "Gemini đã vượt hạn ngạch sử dụng hiện tại (429). "
+                    "Hãy chờ thời gian retry do Google trả về, giảm số lần nạp tài liệu, "
+                    "hoặc bật billing/tăng quota cho project Google AI Studio."
+                )
             yield {"error": message, "done": True}

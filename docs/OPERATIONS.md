@@ -7,8 +7,8 @@ Model được đọc từ `backend/.env`:
 ```env
 GEMINI_API_KEY=...
 # GOOGLE_API_KEY=... is also supported for backward compatibility.
-LLM_MODEL=gemini-2.0-flash
-EMBEDDING_MODEL=models/text-embedding-005
+LLM_MODEL=gemini-3.6-flash
+EMBEDDING_MODEL=models/gemini-embedding-001
 ```
 
 Tên model phải thuộc danh sách model mà API key hiện tại được cấp quyền. Nếu
@@ -33,6 +33,11 @@ backend\venv\Scripts\python.exe evaluation\benchmark.py --k 5 --output evaluatio
 
 Benchmark trả `blocked` và mã lỗi khác 0 nếu key/index không hoạt động; không
 được dùng kết quả blocked làm số liệu trong luận văn.
+
+Nếu gặp `429 RESOURCE_EXHAUSTED` khi ingestion, đó là quota embedding của
+Google đã hết, không phải lỗi API key. Cấu hình mặc định dùng chunk lớn hơn để
+giảm số request; vẫn cần chờ thời gian retry hoặc bật billing/tăng quota khi
+đồng bộ nhiều tài liệu.
 
 ## 2. Thay dữ liệu sinh viên
 

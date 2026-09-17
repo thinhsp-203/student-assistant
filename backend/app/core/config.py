@@ -14,11 +14,11 @@ class Settings(BaseSettings):
     JWT_SECRET_KEY: str = "change-this-development-secret"
     JWT_ALGORITHM: str = "HS256"
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 60
-    LLM_MODEL: str = "gemini-2.0-flash"
-    EMBEDDING_MODEL: str = "models/text-embedding-005"
+    LLM_MODEL: str = "gemini-3.6-flash"
+    EMBEDDING_MODEL: str = "models/gemini-embedding-001"
     
-    CHUNK_SIZE: int = 600
-    CHUNK_OVERLAP: int = 100
+    CHUNK_SIZE: int = 1200
+    CHUNK_OVERLAP: int = 150
     RETRIEVAL_TOP_K: int = 5
     
     BACKEND_CORS_ORIGINS: List[str] = ["http://localhost:5173", "http://localhost:3000"]
